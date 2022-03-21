@@ -50,6 +50,20 @@ app.get('/count', (req, res) => {
     res.json({ count: counter })
 })
 
+// ## Extension 1
+// Add a route PUT `/counter` that can be used to set the counter to a specific value. 
+// The value should be specified by a query string parameter. For example, making a 
+// PUT request to `/counter?value=20` should set the value of the counter to 20. 
+// Use the  `req.query` property in your callback to get the value provided. 
+// See the [express documentation](https://expressjs.com/en/api.html#req.query) If no value is provided, 
+// the counter should not be changed. 
+app.put('/counter', (req, res) => {
+    res.send({ counter: req.query.value })
+})
+
+
+
+
 //Start up our server
 const port = 3030
 app.listen(port, () => {
