@@ -22,7 +22,7 @@ app.get('/counter', (req, res) => {
 })
 
 // POST `/counter/increment`-  Increments the counter on the server and returns the current value.
-app.get(`/counter/increment`, (req, res) => {
+app.post('/counter/increment', (req, res) => {
     counter++
     res.json({ counter: counter })
 })
@@ -41,6 +41,7 @@ app.post('/counter/double', (req, res) => {
 
 // DELETE `/counter` - Resets the counter to 0 and returns the current value.
 app.delete('/counter', (req, res) => {
+    counter = 0
     res.json({ counter: counter })
 })
 
@@ -61,8 +62,25 @@ app.put('/counter', (req, res) => {
     res.send({ counter: req.query.value })
 })
 
+// ## Extension 2
+// Using [route parameters](https://expressjs.com/en/guide/routing.html),  
+// update your API to keep track of multiple counters. 
+// Allow the client to specify the counter name as part of the URL. 
+// For example, to update and access a counter called "cars", 
+// the client could make the following requests:
 
+// - POST `/counter/cars/increment`
+// - POST `/counter/cars/decrement`
+// - POST `/counter/cars/double`
+// - DELETE `/counter/cars`
+// - GET `/counter/cars`
 
+// It should be possible for the client to specify any counter name in the place of "cars".
+app.get('/counter/cars/:one', (req, res) => {
+    console.log(req.route)
+    console.log("Hello", req.params.one)
+    res.send({counter: req.params.one})
+})
 
 //Start up our server
 const port = 3030
